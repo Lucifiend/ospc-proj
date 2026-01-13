@@ -1,56 +1,136 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Resume Builder</title>
+  <title> Resume Builder</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- Typst -->
-  <script
-    type="module"
-    src="https://cdn.jsdelivr.net/npm/@myriaddreamin/typst.ts/dist/esm/contrib/all-in-one-lite.bundle.js"
-    id="typst">
-  </script>
-
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-  <!-- Header -->
+  <!-- Navbar -->
   <header class="navbar">
-    <h1>Resume Builder</h1>
-    <button id="export" class="primary-btn">Export PDF</button>
+    <h1> Resume Builder</h1>
+    <button id="export" class="primary-btn">Download PDF</button>
   </header>
 
   <!-- Main Layout -->
   <main class="container">
-    <!-- Editor -->
+    <!-- Left: Structured Editor -->
     <section class="editor">
-      <h2>Resume Editor (Typst)</h2>
-      <p class="hint">Edit your resume content below. Live preview updates instantly.</p>
-      <textarea id="input" placeholder="Start typing your resume here...">
-= John Doe
-Software Engineer
+      <h2>Resume Details</h2>
+      <p class="hint">Fill in your details. The preview will update live as you type.</p>
 
-* Email: john@example.com
-* Phone: +91 9876543210
-      </textarea>
+      <!-- Personal Info -->
+      <div class="section-card">
+        <button class="section-header" type="button">
+          <span>Personal Information</span>
+          <span class="section-toggle">▼</span>
+        </button>
+        <div class="section-body">
+          <div class="field-grid">
+            <div class="field">
+              <label for="fullName">Full Name</label>
+              <input id="fullName" type="text" placeholder="John Doe" />
+            </div>
+            <div class="field">
+              <label for="title">Title</label>
+              <input id="title" type="text" placeholder="Software Engineer" />
+            </div>
+          </div>
+          <div class="field-grid">
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" type="email" placeholder="you@example.com" />
+            </div>
+            <div class="field">
+              <label for="phone">Phone</label>
+              <input id="phone" type="text" placeholder="+91 99999 99999" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="location">Location</label>
+            <input id="location" type="text" placeholder="Chennai, India" />
+          </div>
+          <div class="field">
+            <label for="summary">Professional Summary</label>
+            <textarea id="summary" rows="3" placeholder="2–3 lines about your experience and strengths."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Work Experience -->
+      <div class="section-card">
+        <button class="section-header" type="button">
+          <span>Work Experience</span>
+          <span class="section-toggle">▼</span>
+        </button>
+        <div class="section-body" id="work-section">
+          <div class="repeatable-list" id="work-items"></div>
+          <button class="secondary-btn add-btn" type="button" data-section="work">
+            + Add Work Experience
+          </button>
+        </div>
+      </div>
+
+      <!-- Education -->
+      <div class="section-card">
+        <button class="section-header" type="button">
+          <span>Education</span>
+          <span class="section-toggle">▼</span>
+        </button>
+        <div class="section-body" id="education-section">
+          <div class="repeatable-list" id="education-items"></div>
+          <button class="secondary-btn add-btn" type="button" data-section="education">
+            + Add Education
+          </button>
+        </div>
+      </div>
+
+      <!-- Projects -->
+      <div class="section-card">
+        <button class="section-header" type="button">
+          <span>Projects</span>
+          <span class="section-toggle">▼</span>
+        </button>
+        <div class="section-body" id="projects-section">
+          <div class="repeatable-list" id="project-items"></div>
+          <button class="secondary-btn add-btn" type="button" data-section="projects">
+            + Add Project
+          </button>
+        </div>
+      </div>
+
+      <!-- Skills -->
+      <div class="section-card">
+        <button class="section-header" type="button">
+          <span>Skills</span>
+          <span class="section-toggle">▼</span>
+        </button>
+        <div class="section-body">
+          <div class="field">
+            <label for="skills">Skills (comma separated)</label>
+            <input id="skills" type="text" placeholder="JavaScript, React, Typst, ..." />
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- Preview -->
+    <!-- Right: Live Preview -->
     <section class="preview">
       <h2>Live Preview</h2>
-      <div id="content" class="preview-box"></div>
+      <p class="hint">Your Typst-based resume renders here as you type.</p>
+      <div id="content" class="preview-box">
+        <!-- SVG or fallback HTML will be injected here -->
+      </div>
     </section>
   </main>
 
   <footer>
-    <p>Built with Typst · Resume Builder Project</p>
+    Built with Typst &middot; Live updating resume builder
   </footer>
 
+  <!-- Typst bundle -->
+  <script id="typst" src="https://cdn.jsdelivr.net/npm/@myriaddreamin/typst-ts-web-compiler@0.4.0/dist/all-in-one-lite.bundle.js"></script>
   <script src="screept.js"></script>
 </body>
 </html>
