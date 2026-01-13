@@ -2,186 +2,102 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Resume Builder</title>
+  <title>Professional Resume Builder</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" />
 </head>
 <body>
-  <!-- Navbar -->
   <header class="navbar">
-    <h1>Resume Builder</h1>
-
-    <div class="navbar-actions">
-      <button id="theme-btn" class="theme-switch" type="button" aria-label="Switch theme">
-        <span class="theme-switch-track">
-          <span class="theme-switch-thumb"></span>
-        </span>
-        <span class="theme-switch-label">Theme</span>
-      </button>
-
-      <button id="export" class="primary-btn">Download PDF</button>
+    <div class="nav-content">
+      <div class="logo">Resume<span>Builder</span></div>
+      <div class="navbar-actions">
+        <button id="export" class="primary-btn">Download PDF</button>
+      </div>
     </div>
   </header>
 
-  <!-- Main Layout -->
   <main class="container">
-    <!-- Left: Structured Editor -->
     <section class="editor">
-      <h2>Resume Details</h2>
-      <p class="hint">Fill in your details. The preview will update live as you type.</p>
-
-      <!-- AI Assistant (Gemini) -->
-      <div class="section-card">
-        <button class="section-header" type="button">
-          <span>AI Assistant</span>
-          <span class="section-toggle">▼</span>
-        </button>
-        <div class="section-body">
-          <div class="field">
-            <label for="gemini-api-key">Gemini API Key</label>
-            <input
-              id="gemini-api-key"
-              type="password"
-              placeholder="Enter your Gemini API Key"
-              autocomplete="off"
-            />
-            <small class="hint">
-              Stored only in this browser (localStorage). Used to call Google Gemini for resume help.
-            </small>
-          </div>
-
-          <div class="field">
-            <label for="job-description">Job Description (Optional)</label>
-            <textarea
-              id="job-description"
-              rows="3"
-              placeholder="Paste job description or company profile here to generate more targeted content."
-            ></textarea>
-          </div>
-
-          <div class="ai-actions">
-            <button id="generate-sample" type="button" class="secondary-btn">
-              Generate Sample Data
-            </button>
-            <button id="enhance-all" type="button" class="secondary-btn">
-              Enhance All Content
-            </button>
-          </div>
-        </div>
+      <div class="editor-header">
+        <h2>Resume Details</h2>
+        <p class="hint">Information is automatically formatted into the Typst template.</p>
       </div>
 
-      <!-- Personal Info -->
       <div class="section-card">
         <button class="section-header" type="button">
           <span>Personal Information</span>
           <span class="section-toggle">▼</span>
         </button>
-        <div class="section-body">
+        <div class="section-body active">
           <div class="field-grid">
             <div class="field">
-              <label for="fullName">Full Name</label>
-              <input id="fullName" type="text" placeholder="John Doe" />
+              <label>Full Name</label>
+              <input type="text" id="ui-name" class="resume-input" placeholder="John Doe" />
             </div>
             <div class="field">
-              <label for="title">Title</label>
-              <input id="title" type="text" placeholder="Software Engineer" />
+              <label>Professional Title</label>
+              <input type="text" id="ui-title" class="resume-input" placeholder="Software Engineer" />
             </div>
           </div>
           <div class="field-grid">
             <div class="field">
-              <label for="email">Email</label>
-              <input id="email" type="email" placeholder="you@example.com" />
+              <label>Email</label>
+              <input type="email" id="ui-email" class="resume-input" placeholder="john@example.com" />
             </div>
             <div class="field">
-              <label for="phone">Phone</label>
-              <input id="phone" type="text" placeholder="+91 99999 99999" />
+              <label>Location</label>
+              <input type="text" id="ui-location" class="resume-input" placeholder="Chennai, India" />
             </div>
-          </div>
-          <div class="field">
-            <label for="location">Location</label>
-            <input id="location" type="text" placeholder="Chennai, India" />
-          </div>
-          <div class="field">
-            <label for="summary">Professional Summary</label>
-            <textarea id="summary" rows="3" placeholder="2–3 lines about your experience and strengths."></textarea>
           </div>
         </div>
       </div>
 
-      <!-- Work Experience -->
       <div class="section-card">
         <button class="section-header" type="button">
           <span>Work Experience</span>
           <span class="section-toggle">▼</span>
         </button>
-        <div class="section-body" id="work-section">
-          <div class="repeatable-list" id="work-items"></div>
-          <button class="secondary-btn add-btn" type="button" data-section="work">
-            + Add Work Experience
-          </button>
+        <div class="section-body">
+          <div class="field">
+            <label>Experience (Markdown/Typst style)</label>
+            <textarea id="ui-experience" class="resume-input" rows="5" placeholder="* Software Engineer at Tech Corp (2022-Present)&#10;- Built scalable APIs..."></textarea>
+          </div>
         </div>
       </div>
 
-      <!-- Education -->
       <div class="section-card">
         <button class="section-header" type="button">
           <span>Education</span>
           <span class="section-toggle">▼</span>
         </button>
-        <div class="section-body" id="education-section">
-          <div class="repeatable-list" id="education-items"></div>
-          <button class="secondary-btn add-btn" type="button" data-section="education">
-            + Add Education
-          </button>
-        </div>
-      </div>
-
-      <!-- Projects -->
-      <div class="section-card">
-        <button class="section-header" type="button">
-          <span>Projects</span>
-          <span class="section-toggle">▼</span>
-        </button>
-        <div class="section-body" id="projects-section">
-          <div class="repeatable-list" id="project-items"></div>
-          <button class="secondary-btn add-btn" type="button" data-section="projects">
-            + Add Project
-          </button>
-        </div>
-      </div>
-
-      <!-- Skills -->
-      <div class="section-card">
-        <button class="section-header" type="button">
-          <span>Skills</span>
-          <span class="section-toggle">▼</span>
-        </button>
         <div class="section-body">
           <div class="field">
-            <label for="skills">Skills (comma separated)</label>
-            <input id="skills" type="text" placeholder="JavaScript, React, Typst, ..." />
+            <label>Education Details</label>
+            <textarea id="ui-education" class="resume-input" rows="3" placeholder="* B.S. in Computer Science&#10;University of Madras (2018-2022)"></textarea>
           </div>
         </div>
       </div>
+
+      <textarea id="input" style="display: none;"></textarea>
     </section>
 
-    <!-- Right: Live Preview -->
     <section class="preview">
-      <h2>Live Preview</h2>
-      <p class="hint">Your Typst-based resume renders here as you type.</p>
-      <div id="content" class="preview-box">
-        <!-- SVG or fallback HTML will be injected here -->
+      <div class="preview-sticky">
+        <div class="preview-header">
+          <h3>Live Preview</h3>
+        </div>
+        <div id="content" class="preview-box">
+          </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    Built with Typst &middot; Live updating resume builder
-  </footer>
-
-  <!-- Typst bundle -->
-  <script id="typst" src="https://cdn.jsdelivr.net/npm/@myriaddreamin/typst-ts-web-compiler@0.4.0/dist/all-in-one-lite.bundle.js"></script>
+  <script src="ui-logic.js"></script>
+  
+  <script type="module"
+    src="https://cdn.jsdelivr.net/npm/@myriaddreamin/typst.ts/dist/esm/contrib/all-in-one-lite.bundle.js"
+    id="typst"></script>
   <script src="screept.js"></script>
 </body>
 </html>
