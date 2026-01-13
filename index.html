@@ -1,43 +1,56 @@
 <!doctype html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
+  <title>Resume Builder</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tiny Typst Previewer Example</title>
-  <!-- Loads the full bundle or the lite version from jsdelivr -->
-  <!-- src="https://cdn.jsdelivr.net/npm/@myriaddreamin/typst-all-in-one.ts@0.7.0-rc2/dist/esm/index.js" -->
-  <script type="module"
+
+  <!-- Typst -->
+  <script
+    type="module"
     src="https://cdn.jsdelivr.net/npm/@myriaddreamin/typst.ts/dist/esm/contrib/all-in-one-lite.bundle.js"
-    id="typst"></script>
+    id="typst">
+  </script>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-  <!-- button to export to PDF -->
-  <button id="export">Export To PDF</button>
-  <!-- User input box thing-->
-  <textarea id="input">Hello, Typst!</textarea>
-  <div id="content"></div>
+  <!-- Header -->
+  <header class="navbar">
+    <h1>Resume Builder</h1>
+    <button id="export" class="primary-btn">Export PDF</button>
+  </header>
+
+  <!-- Main Layout -->
+  <main class="container">
+    <!-- Editor -->
+    <section class="editor">
+      <h2>Resume Editor (Typst)</h2>
+      <p class="hint">Edit your resume content below. Live preview updates instantly.</p>
+      <textarea id="input" placeholder="Start typing your resume here...">
+= John Doe
+Software Engineer
+
+* Email: john@example.com
+* Phone: +91 9876543210
+      </textarea>
+    </section>
+
+    <!-- Preview -->
+    <section class="preview">
+      <h2>Live Preview</h2>
+      <div id="content" class="preview-box"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Built with Typst · Resume Builder Project</p>
+  </footer>
+
   <script src="screept.js"></script>
-  <style>
-    body {
-      margin: 0px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    #export {
-      width: 100%;
-      height: 20px;
-    }
-
-    #input {
-      width: 100%;
-      margin: 0;
-      padding: 0;
-      border-width: 0;
-      height: auto;
-    }
-  </style>
 </body>
 </html>

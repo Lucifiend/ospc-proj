@@ -51,8 +51,6 @@ document.getElementById('typst').addEventListener('load', function () {
   /// Binds previewSvg action to the textarea
   input.oninput = () => {
     previewSvg(input.value);
-    input.style.height = '5px';
-    input.style.height = input.scrollHeight + 'px';
   };
   /// Triggers the first preview.
   previewSvg(input.value);
