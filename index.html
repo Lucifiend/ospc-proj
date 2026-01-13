@@ -5,12 +5,23 @@
   <title>Resume Builder</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
   <!-- Navbar -->
   <header class="navbar">
     <h1>Resume Builder</h1>
-    <button id="export" class="primary-btn">Download PDF</button>
+
+    <div class="navbar-actions">
+      <button id="theme-btn" class="theme-switch" type="button" aria-label="Switch theme">
+        <span class="theme-switch-track">
+          <span class="theme-switch-thumb"></span>
+        </span>
+        <span class="theme-switch-label">Theme</span>
+      </button>
+
+      <button id="export" class="primary-btn">Download PDF</button>
+    </div>
   </header>
 
   <!-- Main Layout -->
@@ -19,6 +30,46 @@
     <section class="editor">
       <h2>Resume Details</h2>
       <p class="hint">Fill in your details. The preview will update live as you type.</p>
+
+      <!-- AI Assistant (Gemini) -->
+      <div class="section-card">
+        <button class="section-header" type="button">
+          <span>AI Assistant</span>
+          <span class="section-toggle">▼</span>
+        </button>
+        <div class="section-body">
+          <div class="field">
+            <label for="gemini-api-key">Gemini API Key</label>
+            <input
+              id="gemini-api-key"
+              type="password"
+              placeholder="Enter your Gemini API Key"
+              autocomplete="off"
+            />
+            <small class="hint">
+              Stored only in this browser (localStorage). Used to call Google Gemini for resume help.
+            </small>
+          </div>
+
+          <div class="field">
+            <label for="job-description">Job Description (Optional)</label>
+            <textarea
+              id="job-description"
+              rows="3"
+              placeholder="Paste job description or company profile here to generate more targeted content."
+            ></textarea>
+          </div>
+
+          <div class="ai-actions">
+            <button id="generate-sample" type="button" class="secondary-btn">
+              Generate Sample Data
+            </button>
+            <button id="enhance-all" type="button" class="secondary-btn">
+              Enhance All Content
+            </button>
+          </div>
+        </div>
+      </div>
 
       <!-- Personal Info -->
       <div class="section-card">

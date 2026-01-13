@@ -88,18 +88,16 @@ function collectFormData() {
 
 /**
  * Generate a simple Typst document from formData
- * (inspired by the HTML/Typst composition in resume-generator.js)
  */
 function generateTypstFromData(data) {
   const { personal, work, education, projects, skills } = data;
 
-const header = `
-= ${personal.fullName || 'Your Name'}
-${personal.title || ''}
-${[personal.location, personal.email, personal.phone].filter(Boolean).join(' · ')}
+  const header = `
+= ${personal.fullName || "Your Name"}
+${personal.title}
+${personal.location} · ${personal.email} · ${personal.phone}
 
 `;
-
 
   const summary = personal.summary
     ? `== Summary
@@ -113,46 +111,46 @@ ${personal.summary}
     ? `== Experience
 
 ${work
-  .map(
-    (w) =>
-      `=== ${w.role} — ${w.company}
+      .map(
+        (w) =>
+          `=== ${w.role} — ${w.company}
 ${w.period}
 
 ${w.description}
 
 `
-  )
-  .join('')}`
+      )
+      .join('')}`
     : '';
 
   const educationSection = education.length
     ? `== Education
 
 ${education
-  .map(
-    (e) =>
-      `=== ${e.degree} — ${e.institution}
+      .map(
+        (e) =>
+          `=== ${e.degree} — ${e.institution}
 ${e.period}
 
 ${e.description}
 
 `
-  )
-  .join('')}`
+      )
+      .join('')}`
     : '';
 
   const projectsSection = projects.length
     ? `== Projects
 
 ${projects
-  .map(
-    (p) =>
-      `=== ${p.name}${p.link ? ` (${p.link})` : ''}
+      .map(
+        (p) =>
+          `=== ${p.name}${p.link ? ` (${p.link})` : ''}
 ${p.description}
 
 `
-  )
-  .join('')}`
+      )
+      .join('')}`
     : '';
 
   const skillsSection = skills.length
@@ -261,9 +259,95 @@ function updatePreview() {
 }
 
 /**
+ * Theme handling
+ */
+let currentTheme = 'light';
+
+function setTheme(theme) {
+  currentTheme = theme;
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('app-theme', theme);
+}
+
+function loadTheme() {
+  const saved = localStorage.getItem('app-theme') || 'light';
+  setTheme(saved);
+}
+
+function toggleTheme() {
+  const next = currentTheme === 'light' ? 'dark' : 'light';
+  setTheme(next);
+}
+
+/**
+ * Gemini key + job description storage
+ */
+const GEMINI_KEY_STORAGE = 'gemini-api-key';
+const JOB_DESC_STORAGE = 'job-description';
+
+function getStoredGeminiKey() {
+  return localStorage.getItem(GEMINI_KEY_STORAGE) || '';
+}
+
+function setStoredGeminiKey(key) {
+  localStorage.setItem(GEMINI_KEY_STORAGE, key || '');
+}
+
+function getStoredJobDescription() {
+  return localStorage.getItem(JOB_DESC_STORAGE) || '';
+}
+
+function setStoredJobDescription(text) {
+  localStorage.setItem(JOB_DESC_STORAGE, text || '');
+}
+
+/**
  * Initialize UI behavior and Typst
  */
 document.getElementById('typst').addEventListener('load', function () {
+  // Initialize theme
+  loadTheme();
+
+  const themeBtn = document.getElementById('theme-btn');
+  if (themeBtn) {
+    themeBtn.addEventListener('click', () => {
+      toggleTheme();
+    });
+  }
+
+  // Gemini API Key & Job Description UI
+  const apiKeyInput = document.getElementById('gemini-api-key');
+  if (apiKeyInput) {
+    apiKeyInput.value = getStoredGeminiKey();
+    apiKeyInput.addEventListener('input', (e) => {
+      setStoredGeminiKey(e.target.value.trim());
+    });
+  }
+
+  const jobDescInput = document.getElementById('job-description');
+  if (jobDescInput) {
+    jobDescInput.value = getStoredJobDescription();
+    jobDescInput.addEventListener('input', (e) => {
+      setStoredJobDescription(e.target.value);
+    });
+  }
+
+  // AI buttons (ready for future Gemini integration)
+  const generateSampleBtn = document.getElementById('generate-sample');
+  if (generateSampleBtn) {
+    generateSampleBtn.addEventListener('click', () => {
+      alert('Sample-data generation via Gemini is not wired yet.');
+    });
+  }
+
+  const enhanceAllBtn = document.getElementById('enhance-all');
+  if (enhanceAllBtn) {
+    enhanceAllBtn.addEventListener('click', () => {
+      alert('Enhance-all via Gemini is not wired yet.');
+    });
+  }
+
+  // Typst init
   $typst.setCompilerInitOptions({
     getModule: () =>
       'https://cdn.jsdelivr.net/npm/@myriaddreamin/typst-ts-web-compiler/pkg/typst_ts_web_compiler_bg.wasm',
