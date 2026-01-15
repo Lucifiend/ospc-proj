@@ -1,0 +1,19 @@
+body {
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#export {
+  width: 100%;
+  height: 20px;
+}
+
+#input {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border-width: 0;
+  height: auto;
+}
