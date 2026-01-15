@@ -47,7 +47,8 @@ document.getElementById('typst').addEventListener('load', function () {
   });
 
   /// Binds exportPdf action to the button
-  document.getElementById('export').onclick = () => exportPdf(input.value);
+  document.getElementById('export-pdf').onclick = () => exportPdf(input.value);
+
   /// Binds previewSvg action to the textarea
   input.oninput = () => {
     previewSvg(input.value);

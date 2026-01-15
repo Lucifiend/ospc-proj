@@ -4,15 +4,97 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Resume builder using typst</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" />
+  <link rel="stylesheet" href="styles.css" />
   <script type="module"
     src="https://cdn.jsdelivr.net/npm/@myriaddreamin/typst.ts/dist/esm/contrib/all-in-one-lite.bundle.js"
     id="typst"></script>
 </head>
 <body>
-  <button id="export">Export To PDF</button>
-  <textarea id="input">Hello, Typst!</textarea>
-  <div id="content"></div>
-  <script src="screept.js"></script>
-  <style src="styles.css"></style>
+	<header class="navbar">
+		<div class="nav-content">
+			<div class="navbar-actions">
+				<button id="export-pdf" class="btn-1">Export to PDF</button>
+			</div>
+		</div>
+	</header>
+  <main class="container">
+    <section class="editor">
+      <div class="editor-header">
+        <h2>Resume Details</h2>
+        <p class="hint">Information is automatically formatted into the Typst template.</p>
+      </div>
+
+      <div class="section-card">
+        <button class="section-header" type="button">
+          <span>Personal Information</span>
+          <span class="section-toggle">▼</span>
+        </button>
+        <div class="section-body active">
+          <div class="field-grid">
+            <div class="field">
+              <label>Full Name</label>
+              <input type="text" id="ui-name" class="resume-input" placeholder="John Doe" />
+            </div>
+            <div class="field">
+              <label>Professional Title</label>
+              <input type="text" id="ui-title" class="resume-input" placeholder="Software Engineer" />
+            </div>
+          </div>
+          <div class="field-grid">
+            <div class="field">
+              <label>Email</label>
+              <input type="email" id="ui-email" class="resume-input" placeholder="john@example.com" />
+            </div>
+            <div class="field">
+              <label>Location</label>
+              <input type="text" id="ui-location" class="resume-input" placeholder="Chennai, India" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <button class="section-header" type="button">
+          <span>Work Experience</span>
+          <span class="section-toggle">▼</span>
+        </button>
+        <div class="section-body">
+          <div class="field">
+            <label>Experience (Markdown/Typst style)</label>
+            <textarea id="ui-experience" class="resume-input" rows="5" placeholder="* Software Engineer at Tech Corp (2022-Present)&#10;- Built scalable APIs..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <button class="section-header" type="button">
+          <span>Education</span>
+          <span class="section-toggle">▼</span>
+        </button>
+        <div class="section-body">
+          <div class="field">
+            <label>Education Details</label>
+            <textarea id="ui-education" class="resume-input" rows="3" placeholder="* B.S. in Computer Science&#10;University of Madras (2018-2022)"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <textarea id="input" style="display: none;"></textarea>
+    </section>
+
+    <section class="preview">
+      <div class="preview-sticky">
+        <div class="preview-header">
+          <h3>Live Preview</h3>
+        </div>
+        <div id="content" class="preview-box">
+          </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/screept.js"></script>
+  <script src="js/uilogic.js"></script>
 </body>
 </html>
