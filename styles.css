@@ -200,3 +200,59 @@ input:focus, textarea:focus { outline: 2px solid #cbd5e1; border-color: var(--pr
 h3{
   font-size: 24px;
 }
+
+/* Container for the buttons to align them side-by-side */
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+/* Base button styles */
+.action-buttons button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  flex: 1; /* Makes buttons equal width */
+}
+
+/* Material Symbol icon adjustment */
+.material-symbols-outlined {
+  font-size: 20px;
+}
+
+/* Outlined Style (Sample Data) */
+.button-outlined {
+  background-color: transparent;
+  border-color: #d1d5db; /* Light gray border */
+  color: #374151;
+}
+
+.button-outlined:hover {
+  background-color: #f9fafb;
+  border-color: #9ca3af;
+}
+
+/* Filled Style (Enhance All) */
+.button-filled {
+  background-color: #2563eb; /* Primary blue */
+  color: white;
+}
+
+.button-filled:hover {
+  background-color: #1d4ed8;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Optional: Active/Pressed state */
+.action-buttons button:active {
+  transform: scale(0.98);
+}

@@ -21,16 +21,27 @@ const previewSvg = mainContent => {
 const exportPdf = mainContent =>
   $typst.pdf({ mainContent }).then(pdfData => {
     var pdfFile = new Blob([pdfData], { type: 'application/pdf' });
-
-    // Creates element with <a> tag
-    const link = document.createElement('a');
+		const url = URL.createObjectURL(pdfFile);
+		const newtab =  window.open(url,'_blank');
+			// Creates element with <a> tag
+		if (!newTab || newTab.closed || typeof newTab.closed === 'undefined') {
+					const link = document.createElement('a');
+					link.href = url;
+					//link.target = '_blank';
+					document.body.appendChild(link);
+					// DO NOT set link.download if you want it to open in a new tab
+					link.click();
+					URL.revokeObjectURL(link.href);
+		}
+    //const link = document.createElement('a');
     // Sets file content in the object URL
-    link.href = URL.createObjectURL(pdfFile);
+    //link.href = url;
     // Sets file name
-    link.target = '_blank';
+    // link.target = '_blank';
+		//document.body.appendChild(link);
     // Triggers a click event to <a> tag to save file.
-    link.click();
-    URL.revokeObjectURL(link.href);
+    //link.click();
+    //URL.revokeObjectURL(link.href);
   });
 
 /// Listens the 'load' event to initialize after loaded the bundle file from CDN (jsdelivr).

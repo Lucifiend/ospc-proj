@@ -79,6 +79,32 @@
           </div>
         </div>
       </div>
+			<div class="section-card">
+  <button class="section-header" type="button">
+    <span>AI Assistant</span>
+    <span class="section-toggle">▼</span>
+  </button>
+  <div class="section-body">
+    <div class="field">
+      <label for="gemini-api-key">Gemini API Key</label>
+      <input type="password" id="gemini-api-key" class="resume-input" placeholder="Enter your API key here">
+    </div>
+    <div class="field">
+      <label for="job-description">Target Job Description (Optional)</label>
+      <textarea id="job-description" class="resume-input" rows="4" placeholder="Paste the job description here to help the AI tailor your content..."></textarea>
+    </div>
+    <div class="action-buttons" style="display: flex; gap: 10px; margin-top: 10px;">
+      <button class="button-outlined" id="generate-sample" style="flex: 1;">
+        <span class="material-symbols-outlined">shuffle</span>
+        <span>Generate Sample Data</span>
+      </button>
+      <button class="button-filled" id="enhance-all" style="flex: 1;">
+        <span class="material-symbols-outlined">auto_fix_high</span>
+        <span>Enhance All Content</span>
+      </button>
+    </div>
+  </div>
+</div>
 
       <textarea id="input" style="display: none;"></textarea>
     </section>
