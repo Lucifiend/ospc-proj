@@ -7,5 +7,4 @@ run using
 ```
 python3 -m http.server 8000
 ```
-
-Need to add more sections and maybe swap resume format.
+To use the ai enhancer, use a gemini api key.
